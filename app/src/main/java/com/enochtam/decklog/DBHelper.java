@@ -57,9 +57,8 @@ import java.util.ArrayList;
             db.execSQL(
                     "create table LOGS_ITEMS" +
                             "(id integer primary key, log_id int, date_time integer, latitude real, longitude real, " +
-                            "observation text, speed real, distance real, ETA real, remarks text, id integer primary key, log_id int, date_time integer, latitude real, longitude real,observation text, speed real, distance real, ETA real, remarks text," +
+                            "observation text, speed real, distance real, ETA real, remarks text, " +
                             "FOREIGN KEY(log_id) REFERENCES LOGS(id))"
-                    //todo: LOG ID POINTS AT THING IN LOGs, CHECKED
 
             );
 
@@ -101,7 +100,7 @@ import java.util.ArrayList;
             contentValues.put("distance",distance);
             contentValues.put("ETA", ETA);
             contentValues.put("remarks", remarks);
-            db.insert("LOG_ITEMS", null, contentValues);
+            db.insert("LOGS_ITEMS", null, contentValues);
             return true;
             // todo:DO WE NEED TO DO UNIQUE ITEMS CHECK SO WE CAN INSERT FALSE? ,NOPE
         }

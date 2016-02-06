@@ -20,6 +20,7 @@ import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
@@ -32,8 +33,21 @@ import java.util.GregorianCalendar;
 public class LogDetails extends AppCompatActivity {
     EditText longText;
     EditText latText;
+    EditText observation;
+    EditText speed;
+    EditText distance;
+    EditText eta;
+    EditText remarks;
+
+
     DBHelper db;
     int log_id;
+
+    public int year,month,day,hour,minute;
+    Button pickDateButton;
+    Button pickTimeButton;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +61,12 @@ public class LogDetails extends AppCompatActivity {
         log_id = intent.getIntExtra("YOLO",0);
         longText = (EditText) findViewById(R.id.longitude);
         latText = (EditText) findViewById(R.id.latitude);
+        observation = (EditText) findViewById(R.id.observation);
+        speed = (EditText) findViewById(R.id.speed);
+        distance = (EditText) findViewById(R.id.distance);
+        eta = (EditText) findViewById(R.id.eta);
+        remarks = (EditText) findViewById(R.id.remarks);
+
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         locationListener = new LocationListener() {
             @Override
@@ -62,6 +82,9 @@ public class LogDetails extends AppCompatActivity {
             public void onProviderEnabled(String provider) {}
             public void onProviderDisabled(String provider) {}
         };
+        pickDateButton = (Button) findViewById(R.id.pickDateButton);
+        pickTimeButton = (Button) findViewById(R.id.pickTimeButton);
+
     }
     LocationManager locationManager;
     LocationListener locationListener;
@@ -72,30 +95,35 @@ public class LogDetails extends AppCompatActivity {
         return true;
     }
     public void saveDetails(View view){
-        EditText dT = (EditText) findViewById(R.id.dateTime);
 
-        //db.insertLogItems(log_id,)
+        GregorianCalendar ca = new GregorianCalendar(year, month, day, hour, minute);
+        int unix = (int)ca.getTimeInMillis()/1000;
+
+        DBHelper db = new DBHelper(this);
+
+        db.insertLogItems(log_id,
+                unix,
+                Float.parseFloat(latText.getText().toString()),
+                Float.parseFloat(longText.getText().toString()),
+                observation.getText().toString(),
+                Float.parseFloat(speed.getText().toString()),
+                Float.parseFloat(distance.getText().toString()),
+                Float.parseFloat(eta.getText().toString()),remarks.getText().toString());
+
+        finish();
     }
-    /*
-    public void getTimeDate(View view){
-        GregorianCalendar currCal = new GregorianCalendar();
-        int day = currCal.get(Calendar.DAY_OF_MONTH);
-        int month = currCal.get(Calendar.MONTH) + 1;
-        int year = currCal.get(Calendar.YEAR);
-        int hour = currCal.get(Calendar.HOUR_OF_DAY);
-        int minute = currCal.get(Calendar.MINUTE);
-        String timeDate = year + "/" + month + "/" + day + "-" + hour +":" + minute;
-        EditText tDate = (EditText) findViewById(R.id.dateTime);
-        tDate.setText(timeDate);
-    }
-    */
+
     public void showDatePickerDialog(View v) {
         Calendar c = Calendar.getInstance();
 
         new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                Toast.makeText(getApplicationContext(),"Time: "+year+monthOfYear+dayOfMonth,Toast.LENGTH_LONG);
+                LogDetails.this.year = year;
+                LogDetails.this.month = monthOfYear;
+                LogDetails.this.day = dayOfMonth;
+                pickDateButton.setText(year+"-"+monthOfYear+"-"+dayOfMonth);
+
             }
         }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)).show();
     }
@@ -105,7 +133,9 @@ public class LogDetails extends AppCompatActivity {
         new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                Toast.makeText(getApplicationContext(),"Time: "+hourOfDay+minute,Toast.LENGTH_LONG);
+                LogDetails.this.hour = hourOfDay;
+                LogDetails.this.minute = minute;
+                pickTimeButton.setText(hourOfDay+":"+minute);
             }
         }, c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE), DateFormat.is24HourFormat(this)).show();
     }

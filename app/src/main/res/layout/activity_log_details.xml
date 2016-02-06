@@ -45,6 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Pick Date"
+                android:id="@+id/pickDateButton"
                 android:onClick="showDatePickerDialog" />
 
             <Button
@@ -52,6 +53,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Pick Time"
+                android:id="@+id/pickTimeButton"
                 android:onClick="showTimePickerDialog" />
 
         </LinearLayout>

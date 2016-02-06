@@ -22,7 +22,7 @@ public class logs extends AppCompatActivity  {
         setContentView(R.layout.logs);
         assert getSupportActionBar() != null;
         Intent intent = getIntent();
-        int temp = intent.getIntExtra("YOLO", 0);
+        temp = intent.getIntExtra("YOLO", 0);
         String temp2 = intent.getStringExtra("SWAG");
         getSupportActionBar().setTitle(temp2 + " Log");
     }
