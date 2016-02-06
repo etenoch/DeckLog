@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">DeckLog</string>
+    <string name="main_activity_title">Deck Logs</string>
 </resources>
