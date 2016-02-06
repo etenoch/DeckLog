@@ -13,20 +13,26 @@ import android.content.Intent;
 public class logs extends AppCompatActivity  {
 
     Button button;
+    public String logNumb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.logs);
         assert getSupportActionBar() != null;
-        getSupportActionBar().setTitle("Logs");
-
+        Intent intent = getIntent();
+        int temp = intent.getIntExtra("YOLO", 0);
+        String temp2 = intent.getStringExtra("SWAG");
+        getSupportActionBar().setTitle(temp2 + " Log");
     }
 
     public void sendMessage(View view) {
         Intent intent = new Intent(logs.this, LogDetails.class);
         startActivity(intent);
+
     }
+
+
 
 
 

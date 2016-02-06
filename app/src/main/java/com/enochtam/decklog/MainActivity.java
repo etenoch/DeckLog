@@ -55,13 +55,17 @@ public class MainActivity extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), "my position is " + position + " and my id is " + dbLogsData.get(position).id, Toast.LENGTH_LONG).show();
+                Intent i = new Intent(getApplicationContext(),logs.class);
+                i.putExtra("YOLO", dbLogsData.get(position).id);
+                i.putExtra("SWAG", dbLogsData.get(position).name);
+                startActivity(i);
+               // Toast.makeText(getApplicationContext(), "my position is " + position + " and my id is " + dbLogsData.get(position).id, Toast.LENGTH_LONG).show();
             }
         });
     }
 
     public void launchAddLog(View view) {
-        Intent i = new Intent(this, newLogs.class);
+        Intent i = new Intent(getApplicationContext(), newLogs.class);
         startActivity(i);
     }
 
