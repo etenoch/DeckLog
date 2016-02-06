@@ -50,13 +50,13 @@ import java.util.ArrayList;
         public void onCreate(SQLiteDatabase db){
             db.execSQL(
                     "create table LOGS" +
-                            "(id integer primary key, name text, vessel text,navigator text"
+                            "(id integer primary key, name text, vessel text,navigator text)"
             );
 
             db.execSQL(
                     "create table LOGS_ITEMS" +
                             "(id integer primary key, log_id int, date_time integer, latitude real, longitude real, " +
-                            "observation text, speed real, distance real, ETA real, remarks text"
+                            "observation text, speed real, distance real, ETA real, remarks text)"
                     //todo: LOG ID POINTS AT THING IN LOGs, CHECKED
             );
 
