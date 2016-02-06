@@ -25,6 +25,13 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
 
+        <Button
+            android:id="@+id/timeButton"
+            android:onClick="getTimeDate"
+            android:text="Fill Date/ Time"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
         <TextView
             android:text="Observation"
             android:layout_width="fill_parent"
@@ -62,6 +69,12 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
 
+        <Button
+            android:text="Fill Location"
+            android:onClick="getCoordinates"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
         <EditText
             android:id="@+id/speed"
             android:inputType="numberDecimal"
@@ -70,12 +83,6 @@
 
         <TextView
             android:text="Distance"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
-
-        <Button
-            android:text="Fill Location"
-            android:onClick="getCoordinates"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
 
