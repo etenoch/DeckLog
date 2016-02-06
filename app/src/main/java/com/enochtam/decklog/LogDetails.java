@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
@@ -31,6 +32,8 @@ import java.util.GregorianCalendar;
 public class LogDetails extends AppCompatActivity {
     EditText longText;
     EditText latText;
+    DBHelper db;
+    int log_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,9 @@ public class LogDetails extends AppCompatActivity {
         assert getSupportActionBar() != null;
         getSupportActionBar().setTitle("Log Details");
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        db = new DBHelper(getApplicationContext());
+        Intent intent = getIntent();
+        log_id = intent.getIntExtra("YOLO",0);
         longText = (EditText) findViewById(R.id.longitude);
         latText = (EditText) findViewById(R.id.latitude);
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
@@ -65,8 +71,10 @@ public class LogDetails extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_log_details, menu);
         return true;
     }
-    public void saveDetail(View view){
-        // on save
+    public void saveDetails(View view){
+        EditText dT = (EditText) findViewById(R.id.dateTime);
+
+        //db.insertLogItems(log_id,)
     }
     /*
     public void getTimeDate(View view){
