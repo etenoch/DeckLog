@@ -17,9 +17,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-
 public class LogDetails extends AppCompatActivity {
-
     EditText longText;
     EditText latText;
 
@@ -45,9 +43,7 @@ public class LogDetails extends AppCompatActivity {
             }
             public void onStatusChanged(String provider, int status, Bundle extras) {}
             public void onProviderEnabled(String provider) {}
-
             public void onProviderDisabled(String provider) {}
-
         };
     }
     LocationManager locationManager;
@@ -58,8 +54,12 @@ public class LogDetails extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_log_details, menu);
         return true;
     }
-    public void saveDetail(View view){}
+    public void saveDetail(View view){
+        // on save
+    }
+    public void getTimeDate(View view){
 
+    }
     public void getCoordinates(View view){
         Criteria criteria = new Criteria();
         criteria.setAccuracy(Criteria.ACCURACY_FINE);
@@ -67,7 +67,6 @@ public class LogDetails extends AppCompatActivity {
         if (TextUtils.isEmpty(provider)){
             Toast.makeText(getApplicationContext(),"error getting provider",Toast.LENGTH_SHORT).show();
         }
-
         PackageManager pm = getApplicationContext().getPackageManager();
         if (pm.checkPermission("android.permission.ACCESS_FINE_LOCATION",getApplicationContext().getPackageName()) == PackageManager.PERMISSION_GRANTED) {
             locationManager.requestSingleUpdate(provider, locationListener, null);
@@ -77,9 +76,6 @@ public class LogDetails extends AppCompatActivity {
         else{
             Toast.makeText(getApplicationContext(),"Unable to obtain Location Permissions",Toast.LENGTH_SHORT).show();
         }
-
-
-
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
