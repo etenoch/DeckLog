@@ -17,7 +17,8 @@
         android:src="@android:drawable/ic_input_add"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:onClick="launchAddLog"/>
 
     <ListView
         android:layout_width="match_parent"

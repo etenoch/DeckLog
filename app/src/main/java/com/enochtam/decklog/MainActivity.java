@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Pair;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private ArrayAdapter<String> adapter;
+    private Pair<ArrayList<String>,int[]> dbLogsData;
     private ArrayList<String> arrayList;
     private DBHelper db;
 
@@ -21,14 +23,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //Intent i = new Intent(this,newLogs.class);
-        //startActivity(i);
 
         db = new DBHelper(getApplicationContext());
 
-        //db.insertLogs("Hello","Test","Test2");
+        dbLogsData = db.getAllLogs();
 
-        arrayList = db.getAllLogs();
+        arrayList = dbLogsData.first;
 
         assert getSupportActionBar() != null;
         ActionBar ab = getSupportActionBar();
@@ -48,5 +48,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+    public void launchAddLog(View view){
+        Intent i = new Intent(this, newLogs.class);
+        startActivity(i);
     }
 }
