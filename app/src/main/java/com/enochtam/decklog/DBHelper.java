@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Pair;
 
 import java.util.ArrayList;
 
@@ -56,7 +57,7 @@ import java.util.ArrayList;
             db.execSQL(
                     "create table LOGS_ITEMS" +
                             "(id integer primary key, log_id int, date_time integer, latitude real, longitude real, " +
-                            "observation text, speed real, distance real, ETA real, remarks text)"
+                            "observation text, speed real, distance real, ETA real, remarks text, id integer primary key, log_id int, date_time integer, latitude real, longitude real,observation text, speed real, distance real, ETA real, remarks text)"
                     //todo: LOG ID POINTS AT THING IN LOGs, CHECKED
             );
 
@@ -135,7 +136,7 @@ import java.util.ArrayList;
             contentValues.put("name", name);
             contentValues.put("navigator", navigator);
             contentValues.put("vessel",vessel);
-            db.update("LOGS", contentValues, "id=?", new String[] {Integer.toString(id)} );
+            db.update("LOGS", contentValues, "id=?", new String[]{Integer.toString(id)});
 
             return true;
         }
@@ -171,31 +172,63 @@ import java.util.ArrayList;
             return db.delete("LOGS", "id = ?", new String[] {Integer.toString(id)});
         }
 
-        public ArrayList<String> getAllLogs(){
+        public Pair<ArrayList<String>, int[]> getAllLogs(){
             ArrayList<String > a = new ArrayList<>();
+            int [] ids=new int[numberOfLogRows()];
 
             SQLiteDatabase db = this.getReadableDatabase();
             Cursor res = db.rawQuery("select * from LOGS", null);
             res.moveToNext();
 
+            int i=0;
             while(res.isAfterLast()==false){
                 a.add(res.getString(res.getColumnIndex(LOGS_NAME)));
                 res.moveToNext();
+
+                //TODO:HOW DO I GET THE ID OF A SPECIFIC row
+                ids[i]=(int)res.getLong(res.getColumnIndex("_id"));
             }
-            return a;
+            return new Pair(a, ids);
         }
 
-        public ArrayList<String> getAllLogItems(){
-            ArrayList<String > a = new ArrayList<>();
+    /**
+     * Returns an arraylist filled with logitems stuffed with the data form the database
+     * @return
+     */
+        public ArrayList<LogItem> getAllLogItems(){
+            ArrayList<LogItem > a = new ArrayList<>();
 
             SQLiteDatabase db = this.getReadableDatabase();
 
             Cursor res =db.rawQuery("select * from LOGS_ITEMS", null);
             res.moveToNext();
 
+            int idd, logIdd,dateTimed;
+
+            float latd, longd, speedd, distanced, ETAd;
+
+            String obsd;
+            String remarksd;
+
+            LogItem addThis;
+
             while(res.isAfterLast()==false){
-                a.add(res.getString(res.getColumnIndex(LOGS_NAME) ));
-                //todo:need to perform string concatenation on time and obs?
+
+                //variable names appended with d for additional clarity and confusion
+                idd=(int) res.getLong(res.getColumnIndex(LOGS_ITEMS_ID));
+                logIdd=(int)res.getLong(res.getColumnIndex(LOGS_ITEMS_log_id));
+                dateTimed=(int)res.getLong(res.getColumnIndex(LOGS_ITEMS_DATE_TIME));
+                latd = res.getFloat(res.getColumnIndex(LOGS_ITEMS_LATITUDE));
+                longd = res.getFloat(res.getColumnIndex(LOGS_ITEMS_LONGITUDE));
+                speedd = res.getFloat(res.getColumnIndex(LOGS_ITEMS_SPEED));
+                distanced = res.getFloat(res.getColumnIndex(LOGS_ITEMS_DISTANCE));
+                ETAd = res.getFloat(res.getColumnIndex(LOGS_ITEMS_ETA));
+                obsd =res.getString(res.getColumnIndex(LOGS_ITEMS_OBSERVATION));
+                remarksd=res.getString(res.getColumnIndex(LOGS_ITEMS_REMARKS));
+
+                addThis= new LogItem(idd,logIdd,dateTimed,latd,longd ,speedd,distanced, ETAd,obsd,remarksd);
+
+                a.add(addThis);
 
                 res.moveToNext();
             }
