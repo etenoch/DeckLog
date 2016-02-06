@@ -20,10 +20,6 @@
         android:orientation="vertical"
         >
 
-        <TextView
-            android:text="9:00"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
 
 
 
