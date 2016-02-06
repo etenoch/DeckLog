@@ -185,6 +185,8 @@ import java.util.ArrayList;
                 a.add(res.getString(res.getColumnIndex(LOGS_NAME)));
 
                 //TODO:HOW DO I GET THE ID OF A SPECIFIC row
+
+
                 ids[i]=(int)res.getLong(res.getColumnIndex(LOGS_ID)); //maybe i got dis bruh
                 res.moveToNext();
 
