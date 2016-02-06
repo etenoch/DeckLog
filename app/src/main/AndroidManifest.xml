@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.enochtam.decklog" >
+    package="com.enochtam.decklog">
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/redwood"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
-        <activity android:name=".MainActivity" >
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,8 +17,8 @@
         </activity>
         <activity
             android:name=".LogDetails"
-            android:label="@string/title_activity_log_details" >
-        </activity>
+            android:label="@string/title_activity_log_details"></activity>
+        <activity android:name=".newLogs"></activity>
     </application>
 
 </manifest>
