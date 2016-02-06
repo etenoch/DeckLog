@@ -9,8 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.enochtam.decklog.newLogs"
-    android:weightSum="1"
-    android:onClick="buttonOnClick">
+    android:weightSum="1">
 
     <EditText
         android:layout_width="match_parent"
@@ -41,6 +40,7 @@
         android:layout_height="73dp"
         android:text="SAVE"
         android:id="@+id/save"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:onClick="buttonOnClick" />
 
 </LinearLayout>
