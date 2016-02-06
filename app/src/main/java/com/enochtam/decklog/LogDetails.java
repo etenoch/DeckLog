@@ -1,6 +1,10 @@
 package com.enochtam.decklog;
 
 import android.Manifest;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -12,10 +16,13 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.util.Calendar;
@@ -69,6 +76,7 @@ public class LogDetails extends AppCompatActivity {
 
         //db.insertLogItems(log_id,)
     }
+    /*
     public void getTimeDate(View view){
         GregorianCalendar currCal = new GregorianCalendar();
         int day = currCal.get(Calendar.DAY_OF_MONTH);
@@ -79,7 +87,27 @@ public class LogDetails extends AppCompatActivity {
         String timeDate = year + "/" + month + "/" + day + "-" + hour +":" + minute;
         EditText tDate = (EditText) findViewById(R.id.dateTime);
         tDate.setText(timeDate);
+    }
+    */
+    public void showDatePickerDialog(View v) {
+        Calendar c = Calendar.getInstance();
 
+        new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Toast.makeText(getApplicationContext(),"Time: "+year+monthOfYear+dayOfMonth,Toast.LENGTH_LONG);
+            }
+        }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)).show();
+    }
+    public void showTimePickerDialog(View v) {
+        Calendar c = Calendar.getInstance();
+
+        new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                Toast.makeText(getApplicationContext(),"Time: "+hourOfDay+minute,Toast.LENGTH_LONG);
+            }
+        }, c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE), DateFormat.is24HourFormat(this)).show();
     }
     public void getCoordinates(View view){
         Criteria criteria = new Criteria();
