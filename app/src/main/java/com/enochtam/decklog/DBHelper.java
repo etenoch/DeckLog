@@ -57,8 +57,10 @@ import java.util.ArrayList;
             db.execSQL(
                     "create table LOGS_ITEMS" +
                             "(id integer primary key, log_id int, date_time integer, latitude real, longitude real, " +
-                            "observation text, speed real, distance real, ETA real, remarks text, id integer primary key, log_id int, date_time integer, latitude real, longitude real,observation text, speed real, distance real, ETA real, remarks text)"
+                            "observation text, speed real, distance real, ETA real, remarks text, id integer primary key, log_id int, date_time integer, latitude real, longitude real,observation text, speed real, distance real, ETA real, remarks text," +
+                            "FOREIGN KEY(log_id) REFERENCES LOGS(id))"
                     //todo: LOG ID POINTS AT THING IN LOGs, CHECKED
+
             );
 
         }
@@ -159,10 +161,10 @@ import java.util.ArrayList;
             return true;
         }
 
-        public int deleteLogsItem(int id){
-            SQLiteDatabase db = this.getWritableDatabase();
-            return db.delete("LOG_ITEMS", "id = ?",new String[] {Integer.toString(id)} );
-        }
+//        public int deleteLogsItem(int id){
+//            SQLiteDatabase db = this.getWritableDatabase();
+//            return db.delete("LOG_ITEMS", "id = ?",new String[] {Integer.toString(id)} );
+//        }
 
         public int deleteLog(int id){
             SQLiteDatabase db = this.getWritableDatabase();
