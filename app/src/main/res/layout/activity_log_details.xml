@@ -20,6 +20,7 @@
             android:layout_height="wrap_content" />
 
         <EditText
+            android:id="@+id/dateTime"
             android:inputType="datetime"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
@@ -30,6 +31,7 @@
             android:layout_height="wrap_content" />
 
         <EditText
+            android:id="@+id/observation"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
 
@@ -39,6 +41,7 @@
             android:layout_height="wrap_content" />
 
         <EditText
+            android:id="@+id/latitude"
             android:inputType="numberDecimal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
@@ -49,6 +52,7 @@
             android:layout_height="wrap_content" />
 
         <EditText
+            android:id="@+id/longitude"
             android:inputType="numberDecimal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
@@ -59,6 +63,7 @@
             android:layout_height="wrap_content" />
 
         <EditText
+            android:id="@+id/speed"
             android:inputType="numberDecimal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
@@ -69,6 +74,7 @@
             android:layout_height="wrap_content" />
 
         <EditText
+            android:id="@+id/distance"
             android:inputType="numberDecimal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
@@ -79,6 +85,7 @@
             android:layout_height="wrap_content" />
 
         <EditText
+            android:id="@+id/eta"
             android:inputType="numberDecimal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
@@ -89,12 +96,14 @@
             android:layout_height="wrap_content" />
 
         <EditText
+            android:id="@+id/remarks"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
 
 
 
         <Button
+            android:id="@+id/saveDetails"
             android:text="Save"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
