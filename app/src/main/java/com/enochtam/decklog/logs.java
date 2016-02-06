@@ -14,6 +14,7 @@ public class logs extends AppCompatActivity  {
 
     Button button;
     public String logNumb;
+    public int temp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +29,12 @@ public class logs extends AppCompatActivity  {
 
     public void sendMessage(View view) {
         Intent intent = new Intent(logs.this, LogDetails.class);
+        intent.putExtra("YOLO", temp);
         startActivity(intent);
 
     }
+
+
 
 
 
