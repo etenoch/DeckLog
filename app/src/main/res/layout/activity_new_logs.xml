@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:hint="Log Name"
-        android:ems="10"
+        android:singleLine="true"
         android:id="@+id/logName" />
 
     <EditText
@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:hint="Name of Navigator"
-        android:ems="10"
+        android:singleLine="true"
         android:id="@+id/navigator"
         android:layout_marginTop="10dp" />
 
