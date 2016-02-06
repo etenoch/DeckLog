@@ -97,7 +97,7 @@ public class LogDetails extends AppCompatActivity {
     public void saveDetails(View view){
 
         GregorianCalendar ca = new GregorianCalendar(year, month, day, hour, minute);
-        int unix = (int)ca.getTimeInMillis()/1000;
+        int unix = (int)(ca.getTimeInMillis()/1000);
 
         DBHelper db = new DBHelper(this);
 
