@@ -73,6 +73,12 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
 
+        <Button
+            android:text="Fill Location"
+            android:onClick="getCoordinates"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
         <EditText
             android:id="@+id/distance"
             android:inputType="numberDecimal"
@@ -104,6 +110,7 @@
 
         <Button
             android:id="@+id/saveDetails"
+            android:onClick="saveDetails"
             android:text="Save"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
