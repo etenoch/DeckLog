@@ -183,10 +183,11 @@ import java.util.ArrayList;
             int i=0;
             while(res.isAfterLast()==false){
                 a.add(res.getString(res.getColumnIndex(LOGS_NAME)));
-                res.moveToNext();
 
                 //TODO:HOW DO I GET THE ID OF A SPECIFIC row
-                ids[i]=(int)res.getLong(res.getColumnIndex("_id"));
+                ids[i]=(int)res.getLong(res.getColumnIndex(LOGS_ID)); //maybe i got dis bruh
+                res.moveToNext();
+
             }
             return new Pair(a, ids);
         }
