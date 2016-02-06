@@ -17,6 +17,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 public class LogDetails extends AppCompatActivity {
     EditText longText;
     EditText latText;
@@ -58,6 +62,15 @@ public class LogDetails extends AppCompatActivity {
         // on save
     }
     public void getTimeDate(View view){
+        GregorianCalendar currCal = new GregorianCalendar();
+        int day = currCal.get(Calendar.DAY_OF_MONTH);
+        int month = currCal.get(Calendar.MONTH) + 1;
+        int year = currCal.get(Calendar.YEAR);
+        int hour = currCal.get(Calendar.HOUR_OF_DAY);
+        int minute = currCal.get(Calendar.MINUTE);
+        String timeDate = year + "/" + month + "/" + day + "-" + hour +":" + minute;
+        EditText tDate = (EditText) findViewById(R.id.dateTime);
+        tDate.setText(timeDate);
 
     }
     public void getCoordinates(View view){
