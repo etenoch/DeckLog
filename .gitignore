@@ -2,6 +2,7 @@
 .gradle
 /local.properties
 /.idea/misc.xml
+/.idea/gradle.xml
 /.idea/workspace.xml
 /.idea/libraries
 .DS_Store
