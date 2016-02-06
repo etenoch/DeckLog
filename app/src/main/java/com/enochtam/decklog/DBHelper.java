@@ -99,7 +99,7 @@ import java.util.ArrayList;
             contentValues.put("distance",distance);
             contentValues.put("ETA", ETA);
             contentValues.put("remarks", remarks);
-            db.insert("LOG_ITEMS",null,contentValues);
+            db.insert("LOG_ITEMS", null, contentValues);
             return true;
             // todo:DO WE NEED TO DO UNIQUE ITEMS CHECK SO WE CAN INSERT FALSE? ,NOPE
         }
@@ -279,4 +279,6 @@ import java.util.ArrayList;
             }
             return a;
         }
+
+
 }
