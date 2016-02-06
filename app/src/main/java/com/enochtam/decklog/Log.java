@@ -16,18 +16,18 @@ public class Log {
 
     /**
      *
-     * @return a string detailing all the attributes of this log
+     * @return a string detailing all the attributes of this log, except id
      */
     public String toString()
     {
         StringBuilder sb = new StringBuilder();
 
-        sb.append(id);
-        sb.append(" ");
+        //sb.append(id);
+        //sb.append(" ");
         sb.append(name);
-        sb.append(" ");
+        sb.append("-");
         sb.append(navigator);
-        sb.append(" ");
+        sb.append("-");
         sb.append(vessel);
         //sb.append("\n");
 

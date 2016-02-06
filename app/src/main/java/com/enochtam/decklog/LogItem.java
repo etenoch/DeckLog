@@ -28,28 +28,34 @@ public class LogItem {
     }
 
     //TODO: PROPER OBJECTS, ADDITOINAL EQUALS, TO STRING ETC COMPARE METHODS
+
+    /**
+     * toString method that returns a string of everything but id, separated by hyphens
+     * as bax instructed
+     * @return
+     */
     public String toString()
     {
         StringBuilder sb = new StringBuilder();
 
-        sb.append(id);
-        sb.append(" ");
+        //sb.append(id);
+        //sb.append(" ");
         sb.append(log_id);
-        sb.append(" ");
+        sb.append("-");
         sb.append(date_time);
-        sb.append(" ");
+        sb.append("-");
         sb.append(lat);
-        sb.append(" ");
+        sb.append("-");
         sb.append(longit);
-        sb.append(" ");
+        sb.append("-");
         sb.append(speed);
-        sb.append(" ");
+        sb.append("-");
         sb.append(distance);
-        sb.append(" ");
+        sb.append("-");
         sb.append(ETA);
-        sb.append(" ");
+        sb.append("-");
         sb.append(observation);
-        sb.append(" ");
+        sb.append("-");
         sb.append(remarks);
         //sb.append("\n");
 
