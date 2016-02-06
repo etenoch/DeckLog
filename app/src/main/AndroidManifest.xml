@@ -22,8 +22,10 @@
         </activity>
         <activity
             android:name=".LogDetails"
-            android:label="@string/title_activity_log_details"></activity>
-        <activity android:name=".newLogs"></activity>
+            android:label="@string/title_activity_log_details"/>
+        <activity android:name=".newLogs"
+            android:noHistory="true">
+        </activity>
         <activity android:name=".logs"
             android:label="Logs">
         </activity>

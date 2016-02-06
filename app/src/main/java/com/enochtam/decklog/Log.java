@@ -1,6 +1,7 @@
 package com.enochtam.decklog;
 
 /**
+ * Log object
  * Created by geo on 06/02/16.
  */
 public class Log {
@@ -20,20 +21,7 @@ public class Log {
      */
     public String toString()
     {
-        StringBuilder sb = new StringBuilder();
-
-        //sb.append(id);
-        //sb.append(" ");
-        sb.append(name);
-        sb.append("-");
-        sb.append(navigator);
-        sb.append("-");
-        sb.append(vessel);
-        //sb.append("\n");
-
-        String out = sb.toString();
-
-        return out;
+        return name + " - " + navigator + " - " + vessel;
     }
 
 }

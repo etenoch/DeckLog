@@ -25,7 +25,6 @@ public class newLogs extends AppCompatActivity {
         EditText vesselText = (EditText) findViewById(R.id.vessel);
         EditText navigatorText = (EditText) findViewById(R.id.navigator);
         db.insertLogs(logNameText.getText().toString(),vesselText.getText().toString(),navigatorText.getText().toString());
-        Intent i = new Intent(this,logs.class);
-        startActivity(i);
+        finish();
     }
 }

@@ -41,7 +41,7 @@ import java.util.ArrayList;
          * @param context
          */
         public DBHelper(Context context){
-            super(context,DATABASE_NAME,null,1);
+            super(context, DATABASE_NAME, null, 1);
         }
 
         @Override
@@ -57,8 +57,10 @@ import java.util.ArrayList;
             db.execSQL(
                     "create table LOGS_ITEMS" +
                             "(id integer primary key, log_id int, date_time integer, latitude real, longitude real, " +
-                            "observation text, speed real, distance real, ETA real, remarks text, id integer primary key, log_id int, date_time integer, latitude real, longitude real,observation text, speed real, distance real, ETA real, remarks text)"
+                            "observation text, speed real, distance real, ETA real, remarks text, id integer primary key, log_id int, date_time integer, latitude real, longitude real,observation text, speed real, distance real, ETA real, remarks text," +
+                            "FOREIGN KEY(log_id) REFERENCES LOGS(id))"
                     //todo: LOG ID POINTS AT THING IN LOGs, CHECKED
+
             );
 
         }
@@ -159,10 +161,10 @@ import java.util.ArrayList;
             return true;
         }
 
-        public int deleteLogsItem(int id){
-            SQLiteDatabase db = this.getWritableDatabase();
-            return db.delete("LOG_ITEMS", "id = ?",new String[] {Integer.toString(id)} );
-        }
+//        public int deleteLogsItem(int id){
+//            SQLiteDatabase db = this.getWritableDatabase();
+//            return db.delete("LOG_ITEMS", "id = ?",new String[] {Integer.toString(id)} );
+//        }
 
         public int deleteLog(int id){
             SQLiteDatabase db = this.getWritableDatabase();
@@ -279,6 +281,50 @@ import java.util.ArrayList;
             }
             return a;
         }
+
+    /**
+     * Returns an arraylist filled with logitems WITH THE targetLogID
+     * @return
+     */
+    public ArrayList<LogItem> getAllLogItems(int targetLogID){
+        ArrayList<LogItem > a = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor res =db.rawQuery("SELECT * FROM LOGS_ITEMS where log_id = "+targetLogID, null);
+        res.moveToNext();
+
+        int idd, logIdd,dateTimed;
+
+        float latd, longd, speedd, distanced, ETAd;
+
+        String obsd;
+        String remarksd;
+
+        LogItem addThis;
+
+        while(res.isAfterLast()==false){
+
+            //variable names appended with d for additional clarity and confusion
+            idd=(int) res.getLong(res.getColumnIndex(LOGS_ITEMS_ID));
+            logIdd=(int)res.getLong(res.getColumnIndex(LOGS_ITEMS_log_id));
+            dateTimed=(int)res.getLong(res.getColumnIndex(LOGS_ITEMS_DATE_TIME));
+            latd = res.getFloat(res.getColumnIndex(LOGS_ITEMS_LATITUDE));
+            longd = res.getFloat(res.getColumnIndex(LOGS_ITEMS_LONGITUDE));
+            speedd = res.getFloat(res.getColumnIndex(LOGS_ITEMS_SPEED));
+            distanced = res.getFloat(res.getColumnIndex(LOGS_ITEMS_DISTANCE));
+            ETAd = res.getFloat(res.getColumnIndex(LOGS_ITEMS_ETA));
+            obsd =res.getString(res.getColumnIndex(LOGS_ITEMS_OBSERVATION));
+            remarksd=res.getString(res.getColumnIndex(LOGS_ITEMS_REMARKS));
+
+            addThis= new LogItem(idd,logIdd,dateTimed,latd,longd ,speedd,distanced, ETAd,obsd,remarksd);
+
+            a.add(addThis);
+
+            res.moveToNext();
+        }
+        return a;
+    }
 
 
 }

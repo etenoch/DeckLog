@@ -14,7 +14,7 @@
     android:fillViewport="true"
     >
 
-    <LinearLayout
+    <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -23,7 +23,9 @@
 
 
 
-    </LinearLayout>
+    </ListView>
+
+
 
 
     <android.support.design.widget.FloatingActionButton
