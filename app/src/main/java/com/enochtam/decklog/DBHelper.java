@@ -17,7 +17,7 @@ import java.util.ArrayList;
         public static final String DATABASE_NAME = "RedwoodDB";
 
         public static final String LOGS_TABLE_NAME="LOGS";
-        public static final String LOGS_ID = "_id";
+        public static final String LOGS_ID = "id";
         public static final String LOGS_NAME ="name";
         public static final String LOGS_VESSEL="vessel";
         public static final String LOGS_NAVIGATOR = "navigator";
@@ -172,6 +172,11 @@ import java.util.ArrayList;
             return db.delete("LOGS", "id = ?", new String[] {Integer.toString(id)});
         }
 
+    /**
+     * This method should be deprecated for not being proper java OOP paradigm and being silly
+     * brute force
+     * @return
+     */
         public Pair<ArrayList<String>, int[]> getAllLogs(){
             ArrayList<String > a = new ArrayList<>();
             int [] ids=new int[numberOfLogRows()];
@@ -183,13 +188,53 @@ import java.util.ArrayList;
             int i=0;
             while(res.isAfterLast()==false){
                 a.add(res.getString(res.getColumnIndex(LOGS_NAME)));
-                res.moveToNext();
 
                 //TODO:HOW DO I GET THE ID OF A SPECIFIC row
-                ids[i]=(int)res.getLong(res.getColumnIndex("_id"));
+
+
+                ids[i]=(int)res.getLong(res.getColumnIndex(LOGS_ID)); //maybe i got dis bruh
+                res.moveToNext();
+
             }
             return new Pair(a, ids);
         }
+
+    /**
+     * USE THIS METHOD INSTEAD
+     * @return
+     */
+    public ArrayList<Log> getLogObjects(){
+        ArrayList<Log > a = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor res =db.rawQuery("select * from LOGS", null);
+        res.moveToNext();
+
+        int idd;
+        String named, navigatord, vesseld;
+
+        Log addThis;
+
+        while(res.isAfterLast()==false){
+
+            //variable names appended with d for additional clarity and confusion
+            idd=(int) res.getLong(res.getColumnIndex(LOGS_ID)); //pray this works now
+            named = res.getString(res.getColumnIndex(LOGS_NAME));
+            navigatord = res.getString(res.getColumnIndex(LOGS_NAVIGATOR));
+            vesseld = res.getString(res.getColumnIndex(LOGS_VESSEL));
+
+
+            addThis= new Log(idd,named, navigatord, vesseld);
+
+            a.add(addThis);
+
+            res.moveToNext();
+        }
+        return a;
+    }
+
+
 
     /**
      * Returns an arraylist filled with logitems stuffed with the data form the database
