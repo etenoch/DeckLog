@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">DeckLog</string>
+    <string name="title_activity_log_details">LogDetails</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
     <string name="main_activity_title">Deck Logs</string>
 </resources>
