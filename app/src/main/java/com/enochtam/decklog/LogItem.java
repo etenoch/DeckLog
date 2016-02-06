@@ -26,4 +26,7 @@ public class LogItem {
         observation = obs;
         remarks = re;
     }
+
+    //TODO: PROPER OBJECTS, ADDITOINAL EQUALS, TO STRING ETC COMPARE METHODS
+
 }
