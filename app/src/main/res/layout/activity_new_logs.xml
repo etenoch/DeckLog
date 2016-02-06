@@ -8,13 +8,14 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.enochtam.decklog.newLogs">
+    tools:context="com.enochtam.decklog.newLogs"
+    android:weightSum="1">
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Log Name"
+        android:hint="Log Name"
         android:ems="10"
         android:id="@+id/logName" />
 
@@ -22,15 +23,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/vessel"
-        android:text="Vessel"
+        android:hint="Vessel"
         android:layout_marginTop="10dp" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Name of Navigator"
+        android:hint="Name of Navigator"
         android:ems="10"
-        android:id="@+id/navigator"/>
+        android:id="@+id/navigator"
+        android:layout_marginTop="10dp" />
+
+    <Button
+        android:layout_width="116dp"
+        android:layout_height="73dp"
+        android:text="SAVE"
+        android:id="@+id/save"
+        android:layout_gravity="center_horizontal" />
 
 </LinearLayout>
