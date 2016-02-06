@@ -20,9 +20,9 @@
             android:name=".LogDetails"
             android:label="@string/title_activity_log_details"></activity>
         <activity android:name=".newLogs"></activity>
+        <activity android:name=".logs"
+            android:label="Logs">
+        </activity>
     </application>
-    <activity android:name=".logs"
-        android:label="Logs">
-    </activity>
 
 </manifest>
