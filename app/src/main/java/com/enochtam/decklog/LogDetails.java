@@ -41,7 +41,7 @@ public class LogDetails extends AppCompatActivity {
 
 
     DBHelper db;
-    int log_id;
+    int log_id,logitem_id;
 
     public int year,month,day,hour,minute;
     Button pickDateButton;
@@ -58,7 +58,8 @@ public class LogDetails extends AppCompatActivity {
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         db = new DBHelper(getApplicationContext());
         Intent intent = getIntent();
-        log_id = intent.getIntExtra("YOLO",0);
+        logitem_id = intent.getIntExtra("YOLO",0);
+        log_id = intent.getIntExtra("SWAG",0);
         longText = (EditText) findViewById(R.id.longitude);
         latText = (EditText) findViewById(R.id.latitude);
         observation = (EditText) findViewById(R.id.observation);
@@ -66,6 +67,17 @@ public class LogDetails extends AppCompatActivity {
         distance = (EditText) findViewById(R.id.distance);
         eta = (EditText) findViewById(R.id.eta);
         remarks = (EditText) findViewById(R.id.remarks);
+
+        if (logitem_id != 0){
+            LogItem log_item = db.getLogItem(logitem_id);
+            longText.setText(Float.toString(log_item.longit));
+            latText.setText(Float.toString(log_item.lat));
+            observation.setText(log_item.observation);
+            speed.setText(Float.toString(log_item.speed));
+            distance.setText(Float.toString(log_item.distance));
+            eta.setText(Float.toString(log_item.ETA));
+            remarks.setText(log_item.remarks);
+        }
 
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         locationListener = new LocationListener() {
@@ -101,14 +113,19 @@ public class LogDetails extends AppCompatActivity {
 
         DBHelper db = new DBHelper(this);
 
-        db.insertLogItems(log_id,
-                unix,
-                Float.parseFloat(latText.getText().toString()),
-                Float.parseFloat(longText.getText().toString()),
-                observation.getText().toString(),
-                Float.parseFloat(speed.getText().toString()),
-                Float.parseFloat(distance.getText().toString()),
-                Float.parseFloat(eta.getText().toString()),remarks.getText().toString());
+        if (logitem_id == 0) {
+            db.insertLogItems(log_id,
+                    unix,
+                    Float.parseFloat(latText.getText().toString()),
+                    Float.parseFloat(longText.getText().toString()),
+                    observation.getText().toString(),
+                    Float.parseFloat(speed.getText().toString()),
+                    Float.parseFloat(distance.getText().toString()),
+                    Float.parseFloat(eta.getText().toString()), remarks.getText().toString());
+        }
+        else{
+            //db.updateLogsItems(
+        }
 
         finish();
     }
