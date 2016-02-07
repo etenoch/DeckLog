@@ -44,9 +44,7 @@ public class MainActivity extends AppCompatActivity {
         ab.setTitle(getString(R.string.main_activity_title));
 
         ListView list = (ListView) findViewById(R.id.log_list);
-        adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1,
-                dbLogStrings);
+        adapter = new ArrayAdapter<>(this, R.layout.custom_simple_list_item_1, dbLogStrings);
 
         list.setAdapter(adapter);
 

@@ -55,7 +55,7 @@ public class logs extends AppCompatActivity  {
 
         ListView list = (ListView) findViewById(R.id.logListView);
         adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1,
+                R.layout.custom_simple_list_item_1,
                 SList);
 
         list.setAdapter(adapter);

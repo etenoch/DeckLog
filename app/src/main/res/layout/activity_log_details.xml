@@ -76,7 +76,7 @@
 
         <EditText
             android:id="@+id/latitude"
-            android:inputType="numberDecimal"
+            android:inputType="numberDecimal|numberSigned"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
 
@@ -87,7 +87,7 @@
 
         <EditText
             android:id="@+id/longitude"
-            android:inputType="numberDecimal"
+            android:inputType="numberDecimal|numberSigned"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
 
@@ -170,6 +170,8 @@
             android:text="Save"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:background="#0068b2"
+            android:textColor="#ffffff"
             android:layout_below="@+id/textView"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
