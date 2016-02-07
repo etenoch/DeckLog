@@ -143,7 +143,7 @@ public class LogDetails extends AppCompatActivity {
                 LogDetails.this.year = year;
                 LogDetails.this.month = monthOfYear;
                 LogDetails.this.day = dayOfMonth;
-                pickDateButton.setText(year+"-"+monthOfYear+"-"+dayOfMonth);
+                pickDateButton.setText(year+"-"+(monthOfYear+1)+"-"+dayOfMonth);
 
             }
         }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)).show();
@@ -156,7 +156,7 @@ public class LogDetails extends AppCompatActivity {
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 LogDetails.this.hour = hourOfDay;
                 LogDetails.this.minute = minute;
-                pickTimeButton.setText(hourOfDay+":"+minute);
+                pickTimeButton.setText(hourOfDay+":"+String.format("%02d", minute));
             }
         }, c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE), DateFormat.is24HourFormat(this)).show();
     }
