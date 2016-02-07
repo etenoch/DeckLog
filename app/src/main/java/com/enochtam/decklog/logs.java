@@ -1,7 +1,9 @@
 package com.enochtam.decklog;
 
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -11,6 +13,8 @@ import android.widget.TextView;
 import android.view.View;
 import android.content.Intent;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 /**
  * Logs Activity
@@ -24,6 +28,7 @@ public class logs extends AppCompatActivity  {
     public int temp;
     public ArrayList<LogItem> AList;
     public ArrayList<String> SList;
+    DBHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +39,7 @@ public class logs extends AppCompatActivity  {
         temp = intent.getIntExtra("YOLO", 0);
         String title = intent.getStringExtra("SWAG");
         getSupportActionBar().setTitle("Log: "+title);
+        db = new DBHelper(getApplicationContext());
     }
 
     public void sendMessage(View view) {
@@ -46,8 +52,7 @@ public class logs extends AppCompatActivity  {
     @Override
     protected void onResume() {
         super.onResume();
-        DBHelper newDb = new DBHelper(getApplicationContext());
-        AList  = newDb.getAllLogItems(temp);
+        AList  = db.getAllLogItems(temp);
         SList = new ArrayList<>();
         for (LogItem i: AList){
             SList.add(i.toString());
@@ -69,6 +74,42 @@ public class logs extends AppCompatActivity  {
                 i.putExtra("SWAG", AList.get(position).log_id);
                 startActivity(i);
                 // Toast.makeText(getApplicationContext(), "my position is " + position + " and my id is " + dbLogsData.get(position).id, Toast.LENGTH_LONG).show();
+            }
+        });
+
+        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+
+                GregorianCalendar gc = new GregorianCalendar();
+                gc.setTimeInMillis(AList.get(position).date_time * 1000L);
+
+                String formattedDate = gc.get(Calendar.YEAR) +"-"+ (gc.get(Calendar.MONTH)+1) + "-" + gc.get(Calendar.DAY_OF_MONTH)+  " " + gc.get(Calendar.HOUR_OF_DAY) + ":" +String.format("%02d", gc.get(Calendar.MINUTE));
+
+                AlertDialog deleteConfirm = new AlertDialog.Builder(logs.this)
+                        .setTitle("Delete")
+                        .setMessage("Are you sure you want to delete this log item from " + formattedDate
+                                + " ?")
+                        .setIcon(R.drawable.delete)
+
+                        .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                db.deleteLogsItem(AList.get(position).id);
+                                logs.this.onResume();
+                                dialog.dismiss();
+                            }
+                        })
+
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .create();
+                deleteConfirm.show();
+                return true;
             }
         });
     }

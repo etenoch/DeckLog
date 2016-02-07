@@ -165,14 +165,14 @@ import java.util.ArrayList;
             contentValues.put("distance", distance);
             contentValues.put("ETA", ETA);
             contentValues.put("remarks", remarks);
-            db.update("LOG_ITEMS", contentValues, "id=?", new String[]{Integer.toString(id)});
+            db.update("LOGS_ITEMS", contentValues, "id=?", new String[]{Integer.toString(id)});
             return true;
         }
 
         //uncommented this method below, i have no idea why
         public int deleteLogsItem(int id){
             SQLiteDatabase db = this.getWritableDatabase();
-            return db.delete("LOG_ITEMS", "id = ?",new String[] {Integer.toString(id)} );
+            return db.delete("LOGS_ITEMS", "id = ?",new String[] {Integer.toString(id)} );
         }
 
         public int deleteLog(int id){
@@ -180,7 +180,7 @@ import java.util.ArrayList;
             db.execSQL("PRAGMA foreign_keys = ON");
 
             //below is the attempt at a manual delete
-            //db.delete("LOG_ITEMS", "log_id=?", new String[] {Integer.toString(id)}); //WILL IT BLEND AND WORK
+            //db.delete("LOGS_ITEMS", "log_id=?", new String[] {Integer.toString(id)}); //WILL IT BLEND AND WORK
 
             return db.delete("LOGS", "id = ?", new String[] {Integer.toString(id)});
         }
@@ -302,7 +302,7 @@ import java.util.ArrayList;
     public LogItem getLogItem(int targetID){
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor res = db.rawQuery("SELECT * FROM LOGS_ITEMS where log_id = "+ targetID, null);
+        Cursor res = db.rawQuery("SELECT * FROM LOGS_ITEMS where id = "+ targetID, null);
         res.moveToNext();
 
         LogItem out;

@@ -12,6 +12,7 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.provider.CalendarContract;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -75,8 +76,13 @@ public class LogDetails extends AppCompatActivity {
             LogItem log_item = db.getLogItem(logitem_id);
             GregorianCalendar gc = new GregorianCalendar();
             gc.setTimeInMillis(log_item.date_time * 1000L);
-            pickDateButton.setText(gc.get(Calendar.YEAR) + "-" + (gc.get(Calendar.MONTH) + 1) + "-" + gc.get(Calendar.DAY_OF_MONTH));
-            pickTimeButton.setText(gc.get(Calendar.HOUR_OF_DAY) + ":" + String.format("%02d", gc.get(Calendar.MINUTE)));
+            year = gc.get(Calendar.YEAR);
+            month = gc.get(Calendar.MONTH);
+            day = gc.get(Calendar.DAY_OF_MONTH);
+            hour = gc.get(Calendar.HOUR_OF_DAY);
+            minute = gc.get(Calendar.MINUTE);
+            pickDateButton.setText(year + "-" + (month+1) + "-" + day);
+            pickTimeButton.setText(hour + ":" + String.format("%02d", gc.get(Calendar.MINUTE)));
             longText.setText(Float.toString(log_item.longit));
             latText.setText(Float.toString(log_item.lat));
             observation.setText(log_item.observation);
@@ -84,6 +90,7 @@ public class LogDetails extends AppCompatActivity {
             distance.setText(Float.toString(log_item.distance));
             eta.setText(Float.toString(log_item.ETA));
             remarks.setText(log_item.remarks);
+
         }
 
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
@@ -128,7 +135,14 @@ public class LogDetails extends AppCompatActivity {
                     Float.parseFloat(eta.getText().toString()), remarks.getText().toString());
         }
         else{
-            //db.updateLogsItems(
+            db.updateLogsItems(logitem_id,log_id,
+                    unix,
+                    Float.parseFloat(latText.getText().toString()),
+                    Float.parseFloat(longText.getText().toString()),
+                    observation.getText().toString(),
+                    Float.parseFloat(speed.getText().toString()),
+                    Float.parseFloat(distance.getText().toString()),
+                    Float.parseFloat(eta.getText().toString()), remarks.getText().toString());
         }
 
         finish();
