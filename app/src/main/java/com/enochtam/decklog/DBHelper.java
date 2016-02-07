@@ -59,7 +59,7 @@ import java.util.ArrayList;
                     "create table LOGS_ITEMS" +
                             "(id integer primary key, log_id int, date_time integer, latitude real, longitude real, " +
                             "observation text, speed real, distance real, ETA real, remarks text, " +
-                            "FOREIGN KEY(log_id) REFERENCES LOGS(id)) ON DELETE CASCADE"
+                            "FOREIGN KEY(log_id) REFERENCES LOGS(id) ON DELETE CASCADE)"
 
             );
 
