@@ -44,8 +44,8 @@
         android:layout_marginTop="10dp" />
 
     <Button
-        android:layout_width="116dp"
-        android:layout_height="72dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="SAVE"
         android:id="@+id/save"
         android:layout_gravity="center_horizontal"
@@ -53,6 +53,7 @@
         android:textColor="#ffffff"
         android:textStyle="bold"
         android:textSize="30dp"
-        android:onClick="buttonOnClick" />
+        android:onClick="buttonOnClick"
+        android:layout_marginTop="10dp"/>
 
 </LinearLayout>
