@@ -15,7 +15,7 @@ public class LogItem {
 
     public LogItem(int id, int lID, int dateTime, float lati, float longitu, float spd, float dist, float esta, String obs, String re)
     {
-        id=id;
+        this.id=id;
         log_id=lID;
         date_time=dateTime;
         lat=lati;
