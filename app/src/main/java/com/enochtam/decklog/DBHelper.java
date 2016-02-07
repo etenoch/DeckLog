@@ -124,7 +124,7 @@ import java.util.ArrayList;
             int numRows = (int) DatabaseUtils.queryNumEntries(db, LOGS_TABLE_NAME);
             return numRows;
         }
-        public int numeberofLogItemRow(){
+        public int numberofLogItemRows(){
             SQLiteDatabase db = this.getReadableDatabase();
             int numRows = (int)DatabaseUtils.queryNumEntries(db, LOGS_ITEMS_TABLE_NAME);
             return numRows;
