@@ -52,7 +52,7 @@ public class logs extends AppCompatActivity  {
             SList.add(i.toString());
         }
 
-        ListView list = (ListView) findViewById(R.id.log_list);
+        ListView list = (ListView) findViewById(R.id.logListView);
         adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1,
                 SList);
@@ -69,13 +69,6 @@ public class logs extends AppCompatActivity  {
             }
         });
     }
-
-
-
-
-
-
-
 
 
 }
