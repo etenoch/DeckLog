@@ -45,15 +45,15 @@ public class LogItem {
         gc.setTimeInMillis(date_time * 1000L);
 
 
-        String formattedDate = gc.get(Calendar.YEAR) +"-"+ (gc.get(Calendar.MONTH)+1) + "-" + gc.get(Calendar.DAY_OF_MONTH)+  " " + gc.get(Calendar.HOUR) + ":" +gc.get(Calendar.MINUTE);
+        String formattedDate = gc.get(Calendar.YEAR) +"-"+ (gc.get(Calendar.MONTH)+1) + "-" + gc.get(Calendar.DAY_OF_MONTH)+  " " + gc.get(Calendar.HOUR_OF_DAY) + ":" +String.format("%02d", gc.get(Calendar.MINUTE));
         //sb.append(id);
         //sb.append(" ");
         sb.append(formattedDate);
-        sb.append("-");
+        sb.append(" (");
         sb.append(lat);
-        sb.append("-");
+        sb.append(",");
         sb.append(longit);
-        //sb.append("\n");
+        sb.append(")");
 
         String out = sb.toString();
 

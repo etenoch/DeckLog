@@ -76,7 +76,7 @@ public class LogDetails extends AppCompatActivity {
             GregorianCalendar gc = new GregorianCalendar();
             gc.setTimeInMillis(log_item.date_time * 1000L);
             pickDateButton.setText(gc.get(Calendar.YEAR) + "-" + (gc.get(Calendar.MONTH) + 1) + "-" + gc.get(Calendar.DAY_OF_MONTH));
-            pickTimeButton.setText(gc.get(Calendar.HOUR) + ":" +gc.get(Calendar.MINUTE));
+            pickTimeButton.setText(gc.get(Calendar.HOUR_OF_DAY) + ":" + String.format("%02d", gc.get(Calendar.MINUTE)));
             longText.setText(Float.toString(log_item.longit));
             latText.setText(Float.toString(log_item.lat));
             observation.setText(log_item.observation);
@@ -143,7 +143,7 @@ public class LogDetails extends AppCompatActivity {
                 LogDetails.this.year = year;
                 LogDetails.this.month = monthOfYear;
                 LogDetails.this.day = dayOfMonth;
-                pickDateButton.setText(year+"-"+monthOfYear+"-"+dayOfMonth);
+                pickDateButton.setText(year+"-"+(monthOfYear+1)+"-"+dayOfMonth);
 
             }
         }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)).show();
@@ -156,7 +156,7 @@ public class LogDetails extends AppCompatActivity {
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 LogDetails.this.hour = hourOfDay;
                 LogDetails.this.minute = minute;
-                pickTimeButton.setText(hourOfDay+":"+minute);
+                pickTimeButton.setText(hourOfDay+":"+String.format("%02d", minute));
             }
         }, c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE), DateFormat.is24HourFormat(this)).show();
     }
