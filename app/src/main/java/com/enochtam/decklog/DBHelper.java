@@ -60,7 +60,6 @@ import java.util.ArrayList;
                             "(id integer primary key, log_id int, date_time integer, latitude real, longitude real, " +
                             "observation text, speed real, distance real, ETA real, remarks text, " +
                             "FOREIGN KEY(log_id) REFERENCES LOGS(id) ON DELETE CASCADE)"
-
             );
 
         }
