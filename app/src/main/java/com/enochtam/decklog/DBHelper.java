@@ -66,6 +66,7 @@ import java.util.ArrayList;
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
+            db.execSQL("PRAGMA foreign_keys = ON");
             db.execSQL("DROP TABLE IF EXISTS LOGS");
             db.execSQL("DROP TABLE IF EXISTS LOGS_ITEMS");
 
@@ -75,7 +76,9 @@ import java.util.ArrayList;
 
         //_id?
         public boolean insertLogs(String name, String navigator, String vessel){
+
             SQLiteDatabase db = this.getWritableDatabase();
+            db.execSQL("PRAGMA foreign_keys = ON");
             ContentValues contentValues = new ContentValues();
 
             contentValues.put("name", name);
@@ -89,6 +92,7 @@ import java.util.ArrayList;
                                       float lat, float longit, String Observation, float speed, float distance,
                                       float ETA, String remarks) {
             SQLiteDatabase db = this.getWritableDatabase();
+            db.execSQL("PRAGMA foreign_keys = ON");
             ContentValues contentValues = new ContentValues();
 
             contentValues.put("log_id", log_id);
@@ -107,6 +111,7 @@ import java.util.ArrayList;
 
         public Cursor getLogItemData (int id){
             SQLiteDatabase db = this.getReadableDatabase();
+            db.execSQL("PRAGMA foreign_keys = ON");
             Cursor res = db.rawQuery("select * from LOGS_ITEMS where id=" + id + "",null);
 
             return res;
@@ -114,6 +119,7 @@ import java.util.ArrayList;
 
         public Cursor getLogsData(int id){
             SQLiteDatabase db = this.getReadableDatabase();
+            db.execSQL("PRAGMA foreign_keys = ON");
             Cursor res = db.rawQuery("select * from LOGS where id=" + id + "",null);
 
             return res;
@@ -121,17 +127,20 @@ import java.util.ArrayList;
 
         public int numberOfLogRows(){
             SQLiteDatabase db = this.getReadableDatabase();
+            db.execSQL("PRAGMA foreign_keys = ON");
             int numRows = (int) DatabaseUtils.queryNumEntries(db, LOGS_TABLE_NAME);
             return numRows;
         }
         public int numberofLogItemRows(){
             SQLiteDatabase db = this.getReadableDatabase();
+            db.execSQL("PRAGMA foreign_keys = ON"); //only needed this before writing
             int numRows = (int)DatabaseUtils.queryNumEntries(db, LOGS_ITEMS_TABLE_NAME);
             return numRows;
         }
 
         public boolean updateLogs(int id, String name, String navigator, String vessel){
             SQLiteDatabase db = this.getWritableDatabase();
+            db.execSQL("PRAGMA foreign_keys = ON");
             ContentValues contentValues = new ContentValues();
 
             contentValues.put("name", name);
@@ -146,6 +155,7 @@ import java.util.ArrayList;
                                        float lat, float longit, String Observation, float speed, float distance,
                                        float ETA, String remarks){
             SQLiteDatabase db = this.getWritableDatabase();
+            db.execSQL("PRAGMA foreign_keys = ON");
             ContentValues contentValues = new ContentValues();
 
             contentValues.put("log_id", log_id);
@@ -161,6 +171,7 @@ import java.util.ArrayList;
             return true;
         }
 
+//        //uncommented this method below, i have no idea why
 //        public int deleteLogsItem(int id){
 //            SQLiteDatabase db = this.getWritableDatabase();
 //            return db.delete("LOG_ITEMS", "id = ?",new String[] {Integer.toString(id)} );
@@ -168,8 +179,10 @@ import java.util.ArrayList;
 
         public int deleteLog(int id){
             SQLiteDatabase db = this.getWritableDatabase();
+            db.execSQL("PRAGMA foreign_keys = ON");
 
-            //TODO:iterate through all log items related to this log and delete
+            //below is the attempt at a manual delete
+            //db.delete("LOG_ITEMS", "log_id=?", new String[] {Integer.toString(id)}); //WILL IT BLEND AND WORK
 
             return db.delete("LOGS", "id = ?", new String[] {Integer.toString(id)});
         }
@@ -361,6 +374,4 @@ import java.util.ArrayList;
         }
         return a;
     }
-
-
 }
