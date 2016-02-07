@@ -76,7 +76,7 @@ public class LogDetails extends AppCompatActivity {
             GregorianCalendar gc = new GregorianCalendar();
             gc.setTimeInMillis(log_item.date_time * 1000L);
             pickDateButton.setText(gc.get(Calendar.YEAR) + "-" + (gc.get(Calendar.MONTH) + 1) + "-" + gc.get(Calendar.DAY_OF_MONTH));
-            pickTimeButton.setText(gc.get(Calendar.HOUR) + ":" +gc.get(Calendar.MINUTE));
+            pickTimeButton.setText(gc.get(Calendar.HOUR_OF_DAY) + ":" + String.format("%02d", gc.get(Calendar.MINUTE)));
             longText.setText(Float.toString(log_item.longit));
             latText.setText(Float.toString(log_item.lat));
             observation.setText(log_item.observation);
