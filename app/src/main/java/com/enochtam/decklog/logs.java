@@ -23,8 +23,8 @@ public class logs extends AppCompatActivity  {
         assert getSupportActionBar() != null;
         Intent intent = getIntent();
         temp = intent.getIntExtra("YOLO", 0);
-        String temp2 = intent.getStringExtra("SWAG");
-        getSupportActionBar().setTitle(temp2 + " Log");
+        String title = intent.getStringExtra("SWAG");
+        getSupportActionBar().setTitle("Log: "+title);
     }
 
     public void sendMessage(View view) {
