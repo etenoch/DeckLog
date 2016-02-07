@@ -282,6 +282,42 @@ import java.util.ArrayList;
         }
 
     /**
+     *
+     * This method probably won't work if target ID is not in there
+     * @param targetID the target ID for the LogItem to retrieve
+     * @return the log item with the given id
+     */
+    public LogItem getLogItem(int targetID){
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor res = db.rawQuery("SELECT * FROM LOGS_ITEMS where log_id = "+ targetID, null);
+        res.moveToNext();
+
+        LogItem out;
+
+        int idd, logIdd,dateTimed;
+        float latd, longd, speedd, distanced, ETAd;
+
+        String obsd;
+        String remarksd;
+
+        idd=(int)res.getLong(res.getColumnIndex(LOGS_ITEMS_ID));
+        logIdd=(int)res.getLong(res.getColumnIndex(LOGS_ITEMS_log_id));
+        dateTimed=(int)res.getLong(res.getColumnIndex(LOGS_ITEMS_DATE_TIME));
+        latd = res.getFloat(res.getColumnIndex(LOGS_ITEMS_LATITUDE));
+        longd = res.getFloat(res.getColumnIndex(LOGS_ITEMS_LONGITUDE));
+        speedd = res.getFloat(res.getColumnIndex(LOGS_ITEMS_SPEED));
+        distanced = res.getFloat(res.getColumnIndex(LOGS_ITEMS_DISTANCE));
+        ETAd = res.getFloat(res.getColumnIndex(LOGS_ITEMS_ETA));
+        obsd =res.getString(res.getColumnIndex(LOGS_ITEMS_OBSERVATION));
+        remarksd=res.getString(res.getColumnIndex(LOGS_ITEMS_REMARKS));
+
+        out = new LogItem(idd,logIdd,dateTimed,latd,longd ,speedd,distanced, ETAd,obsd,remarksd);
+
+        return out;
+    }
+
+    /**
      * Returns an arraylist filled with logitems WITH THE targetLogID
      * @return
      */

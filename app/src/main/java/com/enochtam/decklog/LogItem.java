@@ -1,5 +1,8 @@
 package com.enochtam.decklog;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 /**
  * Created by geo on 06/02/16.
  */
@@ -37,26 +40,19 @@ public class LogItem {
     public String toString()
     {
         StringBuilder sb = new StringBuilder();
+        //Date date = new Date(date_time*1000L);
+        GregorianCalendar gc = new GregorianCalendar();
+        gc.setTimeInMillis(date_time * 1000L);
 
+
+        String formattedDate = gc.get(Calendar.YEAR) +"-"+ (gc.get(Calendar.MONTH)+1) + "-" + gc.get(Calendar.DAY_OF_MONTH)+  " " + gc.get(Calendar.HOUR) + ":" +gc.get(Calendar.MINUTE);
         //sb.append(id);
         //sb.append(" ");
-        sb.append(log_id);
-        sb.append("-");
-        sb.append(date_time);
+        sb.append(formattedDate);
         sb.append("-");
         sb.append(lat);
         sb.append("-");
         sb.append(longit);
-        sb.append("-");
-        sb.append(speed);
-        sb.append("-");
-        sb.append(distance);
-        sb.append("-");
-        sb.append(ETA);
-        sb.append("-");
-        sb.append(observation);
-        sb.append("-");
-        sb.append(remarks);
         //sb.append("\n");
 
         String out = sb.toString();
