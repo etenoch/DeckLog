@@ -67,6 +67,9 @@ public class LogDetails extends AppCompatActivity {
         distance = (EditText) findViewById(R.id.distance);
         eta = (EditText) findViewById(R.id.eta);
         remarks = (EditText) findViewById(R.id.remarks);
+        pickDateButton = (Button) findViewById(R.id.pickDateButton);
+        pickTimeButton = (Button) findViewById(R.id.pickTimeButton);
+
 
         if (logitem_id != 0){
             LogItem log_item = db.getLogItem(logitem_id);
@@ -98,9 +101,6 @@ public class LogDetails extends AppCompatActivity {
             public void onProviderEnabled(String provider) {}
             public void onProviderDisabled(String provider) {}
         };
-        pickDateButton = (Button) findViewById(R.id.pickDateButton);
-        pickTimeButton = (Button) findViewById(R.id.pickTimeButton);
-
     }
     LocationManager locationManager;
     LocationListener locationListener;
