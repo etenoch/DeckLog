@@ -45,10 +45,14 @@
 
     <Button
         android:layout_width="116dp"
-        android:layout_height="73dp"
+        android:layout_height="72dp"
         android:text="SAVE"
         android:id="@+id/save"
         android:layout_gravity="center_horizontal"
+        android:background="#0068b2"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:textSize="30dp"
         android:onClick="buttonOnClick" />
 
 </LinearLayout>
