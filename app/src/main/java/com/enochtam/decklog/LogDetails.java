@@ -124,28 +124,44 @@ public class LogDetails extends AppCompatActivity {
 
         DBHelper db = new DBHelper(this);
 
+        boolean failed = false;
+
         if (logitem_id == 0) {
-            db.insertLogItems(log_id,
-                    unix,
-                    Float.parseFloat(latText.getText().toString()),
-                    Float.parseFloat(longText.getText().toString()),
-                    observation.getText().toString(),
-                    Float.parseFloat(speed.getText().toString()),
-                    Float.parseFloat(distance.getText().toString()),
-                    Float.parseFloat(eta.getText().toString()), remarks.getText().toString());
+            try {
+                db.insertLogItems(log_id,
+                        unix,
+                        Float.parseFloat(latText.getText().toString()),
+                        Float.parseFloat(longText.getText().toString()),
+                        observation.getText().toString(),
+                        Float.parseFloat(speed.getText().toString()),
+                        Float.parseFloat(distance.getText().toString()),
+                        Float.parseFloat(eta.getText().toString()), remarks.getText().toString());
+            }
+            catch (Exception e){
+                failed = true;
+                Toast.makeText(this,"Please ensure all numeric fields are entered", Toast.LENGTH_SHORT).show();
+            }
         }
         else{
-            db.updateLogsItems(logitem_id,log_id,
-                    unix,
-                    Float.parseFloat(latText.getText().toString()),
-                    Float.parseFloat(longText.getText().toString()),
-                    observation.getText().toString(),
-                    Float.parseFloat(speed.getText().toString()),
-                    Float.parseFloat(distance.getText().toString()),
-                    Float.parseFloat(eta.getText().toString()), remarks.getText().toString());
+            try {
+                db.updateLogsItems(logitem_id, log_id,
+                        unix,
+                        Float.parseFloat(latText.getText().toString()),
+                        Float.parseFloat(longText.getText().toString()),
+                        observation.getText().toString(),
+                        Float.parseFloat(speed.getText().toString()),
+                        Float.parseFloat(distance.getText().toString()),
+                        Float.parseFloat(eta.getText().toString()), remarks.getText().toString());
+            }
+            catch (Exception e){
+                failed = true;
+                Toast.makeText(this,"Please ensure all numeric fields are entered", Toast.LENGTH_SHORT).show();
+            }
         }
 
-        finish();
+        if (!failed) {
+            finish();
+        }
     }
 
     public void showDatePickerDialog(View v) {
