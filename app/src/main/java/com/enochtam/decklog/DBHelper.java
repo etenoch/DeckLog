@@ -91,7 +91,7 @@ import java.util.ArrayList;
         public boolean insertLogItems(int log_id, int date_time,
                                       float lat, float longit, String Observation, float speed, float distance,
                                       float ETA, String remarks) {
-            SQLiteDatabase db = this.getWritableDatabase();
+            SQLiteDatabase db = this.getWritableDatabase();//only needed this before writing
             db.execSQL("PRAGMA foreign_keys = ON");
             ContentValues contentValues = new ContentValues();
 
@@ -111,7 +111,6 @@ import java.util.ArrayList;
 
         public Cursor getLogItemData (int id){
             SQLiteDatabase db = this.getReadableDatabase();
-            db.execSQL("PRAGMA foreign_keys = ON");
             Cursor res = db.rawQuery("select * from LOGS_ITEMS where id=" + id + "",null);
 
             return res;
@@ -119,7 +118,7 @@ import java.util.ArrayList;
 
         public Cursor getLogsData(int id){
             SQLiteDatabase db = this.getReadableDatabase();
-            db.execSQL("PRAGMA foreign_keys = ON");
+
             Cursor res = db.rawQuery("select * from LOGS where id=" + id + "",null);
 
             return res;
@@ -133,7 +132,6 @@ import java.util.ArrayList;
         }
         public int numberofLogItemRows(){
             SQLiteDatabase db = this.getReadableDatabase();
-            db.execSQL("PRAGMA foreign_keys = ON"); //only needed this before writing
             int numRows = (int)DatabaseUtils.queryNumEntries(db, LOGS_ITEMS_TABLE_NAME);
             return numRows;
         }
