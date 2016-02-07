@@ -52,6 +52,7 @@ public class logs extends AppCompatActivity  {
             SList.add(i.toString());
         }
 
+
         ListView list = (ListView) findViewById(R.id.logListView);
         adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1,
@@ -62,7 +63,7 @@ public class logs extends AppCompatActivity  {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i = new Intent(getApplicationContext(), logs.class);
+                Intent i = new Intent(getApplicationContext(), LogDetails.class);
                 i.putExtra("YOLO", AList.get(position).id);
                 startActivity(i);
                 // Toast.makeText(getApplicationContext(), "my position is " + position + " and my id is " + dbLogsData.get(position).id, Toast.LENGTH_LONG).show();
