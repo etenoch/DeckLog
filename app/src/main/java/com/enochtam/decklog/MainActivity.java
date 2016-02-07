@@ -1,10 +1,12 @@
 package com.enochtam.decklog;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Pair;
 import android.view.View;
@@ -51,11 +53,40 @@ public class MainActivity extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i = new Intent(getApplicationContext(),logs.class);
+                Intent i = new Intent(getApplicationContext(), logs.class);
                 i.putExtra("YOLO", dbLogsData.get(position).id);
                 i.putExtra("SWAG", dbLogsData.get(position).name);
                 startActivity(i);
-               // Toast.makeText(getApplicationContext(), "my position is " + position + " and my id is " + dbLogsData.get(position).id, Toast.LENGTH_LONG).show();
+                // Toast.makeText(getApplicationContext(), "my position is " + position + " and my id is " + dbLogsData.get(position).id, Toast.LENGTH_LONG).show();
+            }
+        });
+        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                AlertDialog deleteConfirm = new AlertDialog.Builder(MainActivity.this)
+                        .setTitle("Delete")
+                        .setMessage("Are you sure you want to delete " + dbLogsData.get(position).name
+                                + " and all associated log entries?")
+                        .setIcon(R.drawable.delete)
+
+                        .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                db.deleteLog(dbLogsData.get(position).id);
+                                MainActivity.this.onResume();
+                                dialog.dismiss();
+                            }
+                        })
+
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .create();
+                deleteConfirm.show();
+                return true;
             }
         });
     }
