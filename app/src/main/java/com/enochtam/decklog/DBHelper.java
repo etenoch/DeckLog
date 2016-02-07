@@ -49,6 +49,7 @@ import java.util.ArrayList;
          * This method creates an SQL database and i have no idea what im doing
          */
         public void onCreate(SQLiteDatabase db){
+            db.execSQL("PRAGMA foreign_keys = ON");
             db.execSQL(
                     "create table LOGS" +
                             "(id integer primary key, name text, vessel text,navigator text)"
@@ -58,7 +59,7 @@ import java.util.ArrayList;
                     "create table LOGS_ITEMS" +
                             "(id integer primary key, log_id int, date_time integer, latitude real, longitude real, " +
                             "observation text, speed real, distance real, ETA real, remarks text, " +
-                            "FOREIGN KEY(log_id) REFERENCES LOGS(id))"
+                            "FOREIGN KEY(log_id) REFERENCES LOGS(id)) ON DELETE CASCADE"
 
             );
 
