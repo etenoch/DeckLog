@@ -23,7 +23,7 @@ import java.util.ArrayList;
         public static final String LOGS_NAVIGATOR = "navigator";
 
         public static final String LOGS_ITEMS_TABLE_NAME="LOGS_ITEMS";
-        public static final String LOGS_ITEMS_ID ="items_id"; //check if just _id instead
+        public static final String LOGS_ITEMS_ID ="id"; //check if just _id instead
         public static final String LOGS_ITEMS_log_id = "log_id";
         public static final String LOGS_ITEMS_DATE_TIME= "date_time";
         public static final String LOGS_ITEMS_LATITUDE="latitude";
@@ -305,7 +305,7 @@ import java.util.ArrayList;
         while(res.isAfterLast()==false){
 
             //variable names appended with d for additional clarity and confusion
-            idd=(int) res.getLong(res.getColumnIndex(LOGS_ITEMS_ID));
+            idd=(int)res.getLong(res.getColumnIndex(LOGS_ITEMS_ID));
             logIdd=(int)res.getLong(res.getColumnIndex(LOGS_ITEMS_log_id));
             dateTimed=(int)res.getLong(res.getColumnIndex(LOGS_ITEMS_DATE_TIME));
             latd = res.getFloat(res.getColumnIndex(LOGS_ITEMS_LATITUDE));
