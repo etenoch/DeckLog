@@ -169,11 +169,11 @@ import java.util.ArrayList;
             return true;
         }
 
-//        //uncommented this method below, i have no idea why
-//        public int deleteLogsItem(int id){
-//            SQLiteDatabase db = this.getWritableDatabase();
-//            return db.delete("LOG_ITEMS", "id = ?",new String[] {Integer.toString(id)} );
-//        }
+        //uncommented this method below, i have no idea why
+        public int deleteLogsItem(int id){
+            SQLiteDatabase db = this.getWritableDatabase();
+            return db.delete("LOG_ITEMS", "id = ?",new String[] {Integer.toString(id)} );
+        }
 
         public int deleteLog(int id){
             SQLiteDatabase db = this.getWritableDatabase();
