@@ -17,14 +17,14 @@ import java.util.ArrayList;
         public static final String DATABASE_NAME = "RedwoodDB";
 
         public static final String LOGS_TABLE_NAME="LOGS";
-        public static final String LOGS_ID = "id";
+        public static final String LOGS_ID = "id"; //UNIQUE BACK END SQL ID IDENTIFIER
         public static final String LOGS_NAME ="name";
         public static final String LOGS_VESSEL="vessel";
         public static final String LOGS_NAVIGATOR = "navigator";
 
         public static final String LOGS_ITEMS_TABLE_NAME="LOGS_ITEMS";
-        public static final String LOGS_ITEMS_ID ="id"; //check if just _id instead
-        public static final String LOGS_ITEMS_log_id = "log_id";
+        public static final String LOGS_ITEMS_ID ="id"; //UNIQUE BACK END SQL ID IDENTIFIER
+        public static final String LOGS_ITEMS_log_id = "log_id"; //THE ID OF THE LOG THIS LOG ITEM IS ASSOCIATED WITH
         public static final String LOGS_ITEMS_DATE_TIME= "date_time";
         public static final String LOGS_ITEMS_LATITUDE="latitude";
         public static final String LOGS_ITEMS_LONGITUDE="longitude";
@@ -142,21 +142,22 @@ import java.util.ArrayList;
             return true;
         }
 
-        public boolean updateLogsItems(int date_time,
+        public boolean updateLogsItems(int id, int log_id, int date_time,
                                        float lat, float longit, String Observation, float speed, float distance,
                                        float ETA, String remarks){
             SQLiteDatabase db = this.getWritableDatabase();
             ContentValues contentValues = new ContentValues();
 
+            contentValues.put("log_id", log_id);
             contentValues.put("date_time", date_time);
             contentValues.put("latitude", lat);
             contentValues.put("longitude", longit);
             contentValues.put("observation", Observation);
             contentValues.put("speed",speed);
-            contentValues.put("distance",distance);
+            contentValues.put("distance", distance);
             contentValues.put("ETA", ETA);
             contentValues.put("remarks", remarks);
-            db.insert("LOG_ITEMS", null, contentValues);
+            db.update("LOG_ITEMS", contentValues, "id=?", new String[]{Integer.toString(id)});
             return true;
         }
 
